@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danish Nasib Khan — Data Science & Full-Stack Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage-deep:#3f5230;
+    --sage:#79906c;
+    --sage-mid:#94a888;
+    --sage-light:#c3d1b8;
+    --cream:#f6f2e7;
+    --cream-warm:#eee5cf;
+    --charcoal:#33352c;
+    --gold:#b6944f;
+    --line:#d9d0b8;
+    --max-w:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--charcoal);
+    font-family:'Work Sans',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;color:var(--sage-deep);}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;}
+  .wrap{max-width:var(--max-w);margin:0 auto;padding:0 32px;}
+ 
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(246,242,231,.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .brand{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;color:var(--sage-deep);}
+  .brand span{color:var(--gold);}
+  .navlinks{display:flex;gap:28px;font-size:.88rem;}
+  .navlinks a{position:relative;padding:4px 0;color:var(--charcoal);opacity:.75;transition:opacity .25s;}
+  .navlinks a:hover{opacity:1;}
+  .navlinks a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--gold);
+    transition:width .3s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .navtoggle{display:none;background:none;border:none;font-size:1.4rem;color:var(--sage-deep);cursor:pointer;}
+ 
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;
+    padding:168px 0 120px;
+    overflow:hidden;
+  }
+  .blob{
+    position:absolute;border-radius:50%;
+    filter:blur(2px);
+    opacity:.55;
+    z-index:0;
+  }
+  .blob-1{width:420px;height:420px;background:var(--sage-light);top:-140px;right:-120px;}
+  .blob-2{width:260px;height:260px;background:var(--cream-warm);bottom:-80px;left:-90px;opacity:.8;}
+  .hero .wrap{position:relative;z-index:1;}
+  .eyebrow{
+    font-size:.78rem;color:var(--sage);text-transform:uppercase;letter-spacing:.14em;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);display:inline-block;}
+  h1.name{
+    font-size:clamp(2.6rem,6vw,4.4rem);
+    font-weight:600;
+    line-height:1.05;
+    max-width:760px;
+    letter-spacing:-.01em;
+  }
+  h1.name em{font-style:italic;font-weight:300;color:var(--sage);}
+  .tagline{
+    margin-top:22px;
+    font-size:1.08rem;
+    max-width:560px;
+    color:#54574a;
+  }
+  .hero-cta{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:13px 26px;border-radius:2px;font-size:.9rem;font-weight:500;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .btn-primary{background:var(--sage-deep);color:var(--cream);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(63,82,48,.5);}
+  .btn-ghost{border:1px solid var(--sage-deep);color:var(--sage-deep);}
+  .btn-ghost:hover{background:var(--sage-deep);color:var(--cream);}
+ 
+  /* ---------- VINE DIVIDER (signature element) ---------- */
+  .vine{display:block;width:100%;height:64px;margin:0 auto;}
+  .vine path{stroke:var(--sage-mid);stroke-width:1.4;fill:none;}
+  .vine circle{fill:var(--gold);}
+ 
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:96px 0;position:relative;}
+  .section-head{margin-bottom:52px;}
+  .section-num{font-size:.78rem;color:var(--gold);}
+  .section-title{font-size:clamp(1.7rem,3.4vw,2.3rem);font-weight:600;margin-top:6px;}
+  .section-sub{color:#666a5b;max-width:520px;margin-top:10px;font-size:.96rem;}
+ 
+  /* ---------- EDUCATION ---------- */
+  .timeline{border-left:1.5px solid var(--line);padding-left:36px;display:flex;flex-direction:column;gap:44px;}
+  .tl-item{position:relative;}
+  .tl-item::before{
+    content:"";position:absolute;left:-42px;top:5px;width:12px;height:12px;border-radius:50%;
+    background:var(--cream);border:2px solid var(--gold);
+  }
+  .tl-status{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--sage);margin-bottom:4px;}
+  .tl-title{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;color:var(--sage-deep);}
+  .tl-meta{color:#666a5b;font-size:.92rem;margin-top:4px;}
+  .tl-gpa{
+    display:inline-block;margin-top:10px;padding:5px 12px;border:1px solid var(--sage-light);
+    border-radius:20px;font-size:.8rem;color:var(--sage-deep);background:var(--cream-warm);
+  }
+ 
+  /* ---------- SKILLS ---------- */
+  .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:36px;}
+  .skill-group h3{font-size:1rem;font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .skill-group h3::before{content:"❧";color:var(--gold);font-size:1.1rem;}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{
+    padding:7px 14px;background:#fff;border:1px solid var(--line);border-radius:20px;
+    font-size:.84rem;color:var(--charcoal);transition:all .25s ease;
+  }
+  .chip:hover{border-color:var(--sage);background:var(--cream-warm);transform:translateY(-2px);}
+ 
+  /* ---------- PROJECTS ---------- */
+  .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:4px;padding:30px;
+    display:flex;flex-direction:column;gap:14px;
+    transition:box-shadow .3s ease, transform .3s ease, border-color .3s ease;
+  }
+  .card:hover{box-shadow:0 18px 40px -20px rgba(63,82,48,.35);transform:translateY(-4px);border-color:var(--sage-light);}
+  .card-tag{font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;}
+  .card h3{font-size:1.15rem;font-weight:600;}
+  .card p{font-size:.9rem;color:#5a5d4f;flex-grow:1;}
+  .card-stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+  .stack-tag{font-size:.72rem;padding:3px 10px;background:var(--cream);border-radius:12px;color:var(--sage-deep);}
+  .card-link{font-size:.84rem;color:var(--sage-deep);border-top:1px solid var(--line);padding-top:14px;margin-top:auto;}
+  .card-link:hover{color:var(--gold);}
+ 
+  /* ---------- CERTIFICATIONS ---------- */
+  .certs{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line);}
+  .cert-row{
+    display:flex;justify-content:space-between;align-items:center;padding:20px 0;
+    border-bottom:1px solid var(--line);flex-wrap:wrap;gap:8px;
+  }
+  .cert-row h3{font-size:1rem;font-weight:500;color:var(--charcoal);font-family:'Work Sans',sans-serif;}
+  .cert-issuer{color:var(--sage);font-size:.85rem;}
+  .cert-year{font-size:.8rem;color:#8a8d7d;}
+ 
+  /* ---------- CONTACT ---------- */
+  .contact-box{
+    background:var(--sage-deep);color:var(--cream);border-radius:6px;
+    padding:64px 48px;position:relative;overflow:hidden;
+  }
+  .contact-box .blob{background:var(--sage-mid);opacity:.35;}
+  .contact-box .blob-c1{width:300px;height:300px;top:-100px;right:-60px;}
+  .contact-inner{position:relative;z-index:1;}
+  .contact-box h2{color:var(--cream);}
+  .contact-box p{color:var(--sage-light);max-width:480px;margin-top:10px;}
+  .contact-links{display:flex;flex-wrap:wrap;gap:18px;margin-top:32px;}
+  .contact-links a{
+    padding:12px 22px;border:1px solid rgba(246,242,231,.4);border-radius:2px;font-size:.88rem;
+    transition:all .25s ease;
+  }
+  .contact-links a:hover{background:var(--cream);color:var(--sage-deep);border-color:var(--cream);}
+ 
+  footer{padding:36px 0;text-align:center;font-size:.8rem;color:#8a8d7d;}
+ 
+  @media(max-width:720px){
+    .navlinks{display:none;}
+    header.hero{padding:140px 0 90px;}
+    .contact-box{padding:44px 26px;}
+  }
+</style>
+</head>
+<body>
+ 
+<nav>
+  <div class="wrap">
+    <div class="brand">Danish <span>Khan</span></div>
+    <div class="navlinks">
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+ 
+<header class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="wrap">
+    <div class="eyebrow mono">Data Science &amp; Full-Stack Development</div>
+    <h1 class="name">Danish Nasib Khan<br><em>building with data,</em> and the web.</h1>
+    <p class="tagline">M.Sc. Data Science student with a full-stack development foundation — I turn raw data into decisions, and ideas into working products, from the database up to the interface.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</header>
+ 
+<svg class="vine" viewBox="0 0 1080 64" preserveAspectRatio="none">
+  <path d="M0 32 C 180 8, 360 56, 540 32 S 900 8, 1080 32" />
+  <circle cx="180" cy="20" r="4"/>
+  <circle cx="540" cy="32" r="4"/>
+  <circle cx="900" cy="18" r="4"/>
+</svg>
+ 
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">01 · Education</div>
+      <h2 class="section-title">Academic Path</h2>
+      <p class="section-sub">A foundation in computer science, now specializing in data science.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-status mono">In Progress</div>
+        <div class="tl-title">M.Sc. Data Science</div>
+        <div class="tl-meta">Coursework spanning statistics, machine learning, and applied data analysis.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-status mono">Completed</div>
+        <div class="tl-title">B.Sc. Computer Science</div>
+        <div class="tl-meta">Core foundations in programming, data structures, algorithms, and web technologies.</div>
+        <div class="tl-gpa mono">GPA 8.4</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-status mono">Completed</div>
+        <div class="tl-title">12 th Grade</div>
+        <div class="tl-meta">Strengthened analytical and problem-solving skills through Physics, Chemistry and Mathematics.</div>
+        <div class="tl-gpa mono">Percentage: 72.17%</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-status mono">Completed</div>
+        <div class="tl-title">10 th Grade</div>
+        <div class="tl-meta">Established a solid foundation in academics, logical reasoning, and problem-solving.</div>
+        <div class="tl-gpa mono">Percentage: 80.60%</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="skills" style="background:var(--cream-warm);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">02 · Skills</div>
+      <h2 class="section-title">Toolkit</h2>
+      <p class="section-sub">Comfortable across the stack — from data pipelines to full web applications.</p>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="chips">
+          <div class="chip">Python</div>
+          <div class="chip">Java</div>
+          <div class="chip">PHP</div>
+          <div class="chip">JavaScript</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Frontend</h3>
+        <div class="chips">
+          <div class="chip">HTML</div>
+          <div class="chip">CSS</div>
+          <div class="chip">React.js</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Backend</h3>
+        <div class="chips">
+          <div class="chip">Node.js</div>
+          <div class="chip">Express.js</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Databases</h3>
+        <div class="chips">
+          <div class="chip">MongoDB</div>
+          <div class="chip">MySQL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">03 · Projects</div>
+      <h2 class="section-title">Selected Work</h2>
+      <p class="section-sub">Explore the projects that reflect my passion for technology and development.</p>
+    </div>
+    <div class="projects">
+      <div class="card">
+        <div class="card-tag mono">Frontend Web App</div>
+        <h3>Organic Fruit Selling App</h3>
+        <p>A responsive web application for selling organic fruits online, with features for product browsing, cart management, and user authentication.</p>
+        <div class="card-stack">
+          <span class="stack-tag">React.js</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">CSS</span>
+        </div>
+        <a href="https://organicfruitssell.netlify.app/" class="card-link">View on Netlify →</a>
+      </div>
+      <div class="card">
+        <div class="card-tag mono">Full-Stack</div>
+        <h3>MERN Stack Application</h3>
+        <p>An full-stack web application for Rahat Digital's For Showing Information Of Gov. Id's and Documents as User Needed and for Affilate Marketing.</p>
+        <div class="card-stack">
+          <span class="stack-tag">React.js</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">MongoDB</span>
+        </div>
+        <a href="https://rahatdigitals.in/" class="card-link">View on Rahat Digital's →</a>
+      </div>
+      <div class="card">
+        <div class="card-tag mono">WEB'S 360</div>
+        <h3>Multi-Platform Web Application</h3>
+        <p>An interactive platform for managing data and selling products online. Provides a custom dashboard for users to store and view their shop information.</p>
+        <div class="card-stack">
+          <span class="stack-tag">PHP</span>
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">JavaScript</span>
+        </div>
+        <a href="https://github.com/danish78691223/web-s-360" class="card-link">View on GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="certifications" style="background:var(--cream-warm);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num mono">04 · Certifications</div>
+      <h2 class="section-title">Credentials</h2>
+      <p class="section-sub">Credentials that highlight my commitment to learning and professional growth.</p>
+    </div>
+    <div class="certs">
+      <div class="cert-row">
+        <div>
+          <h3>Ultimate Python Guide Course</h3>
+          <div class="cert-issuer">Unstop</div>
+        </div>
+        <div class="cert-year mono">2026</div>
+      </div>
+      <div class="cert-row">
+        <div>
+          <h3>Full-Stack Web Development (MERN) Intern</h3>
+          <div class="cert-issuer">Null Class EdTech Pvt. Ltd.</div>
+        </div>
+        <div class="cert-year mono">2025</div>
+      </div>
+      <div class="cert-row">
+        <div>
+          <h3>30 Days DSA Bootcamp</h3>
+          <div class="cert-issuer">Unstop</div>
+        </div>
+        <div class="cert-year mono">2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <div class="blob contact-box-blob blob-c1"></div>
+      <div class="contact-inner">
+        <div class="section-num mono" style="color:var(--sage-light);">05 · Contact</div>
+        <h2>Let's build something.</h2>
+        <p>Open to data science and full-stack development opportunities, internships, and collaborations. Reach out below.</p>
+        <div class="contact-links">
+          <a href="mailto:askdnk2523@gmail.com">askdnk2523@gmail.com</a>
+          <a href="https://www.linkedin.com/in/danish-khan-b3284a411/">LinkedIn</a>
+          <a href="https://github.com/danish78691223">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<footer>
+  <div class="wrap">© <span id="year"></span> Danish Nasib Khan. Built with care.</div>
+</footer>
+ 
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+ 
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, {threshold:0.15});
+ 
+  document.querySelectorAll('section').forEach(sec => {
+    sec.style.opacity = 0;
+    sec.style.transform = 'translateY(24px)';
+    sec.style.transition = 'opacity .7s ease, transform .7s ease';
+    observer.observe(sec);
+  });
+</script>
+ 
+</body>
+</html>
