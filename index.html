@@ -181,12 +181,72 @@
   .contact-links a:hover{background:var(--cream);color:var(--sage-deep);border-color:var(--cream);}
  
   footer{padding:36px 0;text-align:center;font-size:.8rem;color:#8a8d7d;}
+  .back-to-top{
+  display:inline-block;
+  margin-bottom:18px;
+  padding:9px 18px;
+  border:1px solid var(--sage-deep);
+  color:var(--sage-deep);
+  border-radius:2px;
+  font-size:.82rem;
+  transition:all .25s ease;
+}
+
+.back-to-top:hover{
+  background:var(--sage-deep);
+  color:var(--cream);
+  transform:translateY(-2px);
+}
+
+.footer-text{
+  font-size:.8rem;
+  color:#8a8d7d;
+}
  
   @media(max-width:720px){
-    .navlinks{display:none;}
-    header.hero{padding:140px 0 90px;}
-    .contact-box{padding:44px 26px;}
+
+  .navlinks{
+    display:none;
+    position:absolute;
+    top:68px;
+    left:0;
+    right:0;
+    flex-direction:column;
+    gap:0;
+    background:rgba(246,242,231,.97);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:12px 32px 18px;
   }
+
+  .navlinks.active{
+    display:flex;
+  }
+
+  .navlinks a{
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+    font-size:.9rem;
+  }
+
+  .navlinks a:last-child{
+    border-bottom:none;
+  }
+
+  .navtoggle{
+    display:block;
+    font-size:1.6rem;
+    padding:5px 8px;
+  }
+
+  header.hero{
+    padding:140px 0 90px;
+  }
+
+  .contact-box{
+    padding:44px 26px;
+  }
+}
 </style>
 </head>
 <body>
@@ -201,6 +261,8 @@
       <a href="#certifications">Certifications</a>
       <a href="#contact">Contact</a>
     </div>
+
+    <button class="navtoggle" id="navtoggle" aria-label="Open menu">☰</button>
   </div>
 </nav>
  
@@ -402,12 +464,47 @@
 </section>
  
 <footer>
-  <div class="wrap">© <span id="year"></span> Danish Nasib Khan. Built with care.</div>
+  <div class="wrap">
+    <a href="#" class="back-to-top">Back to Top ↑</a>
+
+    <div class="footer-text">
+      © <span id="year"></span> Danish Nasib Khan. Built with care.
+    </div>
+  </div>
 </footer>
  
 <script>
+
   document.getElementById('year').textContent = new Date().getFullYear();
- 
+
+  /* ---------- MOBILE NAVIGATION ---------- */
+
+  const navtoggle = document.getElementById('navtoggle');
+  const navlinks = document.querySelector('.navlinks');
+
+  navtoggle.addEventListener('click', () => {
+    navlinks.classList.toggle('active');
+
+    if (navlinks.classList.contains('active')) {
+      navtoggle.textContent = '✕';
+      navtoggle.setAttribute('aria-label', 'Close menu');
+    } else {
+      navtoggle.textContent = '☰';
+      navtoggle.setAttribute('aria-label', 'Open menu');
+    }
+  });
+
+  document.querySelectorAll('.navlinks a').forEach(link => {
+    link.addEventListener('click', () => {
+      navlinks.classList.remove('active');
+      navtoggle.textContent = '☰';
+      navtoggle.setAttribute('aria-label', 'Open menu');
+    });
+  });
+
+
+  /* ---------- SECTION ANIMATION ---------- */
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
@@ -416,13 +513,14 @@
       }
     });
   }, {threshold:0.15});
- 
+
   document.querySelectorAll('section').forEach(sec => {
     sec.style.opacity = 0;
     sec.style.transform = 'translateY(24px)';
     sec.style.transition = 'opacity .7s ease, transform .7s ease';
     observer.observe(sec);
   });
+
 </script>
  
 </body>
